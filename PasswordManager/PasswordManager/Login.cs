@@ -34,12 +34,14 @@ namespace PasswordManager
 
         private void Okay_Btn_Click(object sender, EventArgs e)
         {
-
+           String pass = MP_Input.Text;
+            if(pass = )
         }
 
         private void NewDB_Click(object sender, EventArgs e)
         {
-            
+            DB.
+
         }
     }
 }

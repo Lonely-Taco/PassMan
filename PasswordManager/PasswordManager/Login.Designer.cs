@@ -49,7 +49,7 @@
             // MP_label
             // 
             this.MP_label.AutoSize = true;
-            this.MP_label.Location = new System.Drawing.Point(83, 85);
+            this.MP_label.Location = new System.Drawing.Point(82, 106);
             this.MP_label.Name = "MP_label";
             this.MP_label.Size = new System.Drawing.Size(88, 13);
             this.MP_label.TabIndex = 1;
@@ -59,7 +59,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(83, 125);
+            this.label3.Location = new System.Drawing.Point(78, 55);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(92, 13);
             this.label3.TabIndex = 2;
@@ -67,14 +67,15 @@
             // 
             // MP_Input
             // 
-            this.MP_Input.Location = new System.Drawing.Point(207, 85);
+            this.MP_Input.Location = new System.Drawing.Point(198, 103);
             this.MP_Input.Name = "MP_Input";
             this.MP_Input.Size = new System.Drawing.Size(100, 20);
             this.MP_Input.TabIndex = 3;
+            this.MP_Input.UseSystemPasswordChar = true;
             // 
             // Choose_Btn
             // 
-            this.Choose_Btn.Location = new System.Drawing.Point(207, 125);
+            this.Choose_Btn.Location = new System.Drawing.Point(198, 50);
             this.Choose_Btn.Name = "Choose_Btn";
             this.Choose_Btn.Size = new System.Drawing.Size(75, 23);
             this.Choose_Btn.TabIndex = 4;
@@ -83,7 +84,7 @@
             // 
             // NewDB
             // 
-            this.NewDB.Location = new System.Drawing.Point(70, 197);
+            this.NewDB.Location = new System.Drawing.Point(70, 152);
             this.NewDB.Name = "NewDB";
             this.NewDB.Size = new System.Drawing.Size(126, 23);
             this.NewDB.TabIndex = 5;
@@ -93,7 +94,7 @@
             // 
             // Okay_Btn
             // 
-            this.Okay_Btn.Location = new System.Drawing.Point(223, 197);
+            this.Okay_Btn.Location = new System.Drawing.Point(321, 101);
             this.Okay_Btn.Name = "Okay_Btn";
             this.Okay_Btn.Size = new System.Drawing.Size(75, 23);
             this.Okay_Btn.TabIndex = 6;
@@ -103,7 +104,7 @@
             // 
             // Cancel_Btn
             // 
-            this.Cancel_Btn.Location = new System.Drawing.Point(334, 197);
+            this.Cancel_Btn.Location = new System.Drawing.Point(429, 101);
             this.Cancel_Btn.Name = "Cancel_Btn";
             this.Cancel_Btn.Size = new System.Drawing.Size(75, 23);
             this.Cancel_Btn.TabIndex = 7;
@@ -115,7 +116,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(462, 332);
+            this.ClientSize = new System.Drawing.Size(565, 208);
             this.Controls.Add(this.Cancel_Btn);
             this.Controls.Add(this.Okay_Btn);
             this.Controls.Add(this.NewDB);
