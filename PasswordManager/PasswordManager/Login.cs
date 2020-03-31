@@ -12,9 +12,11 @@ namespace PasswordManager
 {
     public partial class Login : Form
     {
-        public Login()
+        DB dashboard;
+        public Login(DB dashboard)
         {
             InitializeComponent();
+            this.dashboard = dashboard;
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -35,6 +37,15 @@ namespace PasswordManager
         private void Okay_Btn_Click(object sender, EventArgs e)
         {
            String pass = MP_Input.Text;
+
+            if(true /*given password is the same as actual password*/)
+            {
+                this.dashboard.successfulLogin();
+            }
+            else
+            {
+                /*Error message with unsuccesful login pops up */
+            }
             
         }
 
@@ -45,5 +56,9 @@ namespace PasswordManager
             nb.ShowDialog();
             
         }
+
+        
+        
+        
     }
 }

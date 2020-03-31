@@ -1,6 +1,6 @@
 ﻿namespace PasswordManager
 {
-    partial class Entry
+    partial class EditEntry
     {
         /// <summary>
         /// Required designer variable.
@@ -42,7 +42,7 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(314, 227);
+            this.cancelButton.Location = new System.Drawing.Point(284, 180);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(75, 23);
             this.cancelButton.TabIndex = 19;
@@ -52,7 +52,7 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(196, 227);
+            this.saveButton.Location = new System.Drawing.Point(166, 180);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(75, 23);
             this.saveButton.TabIndex = 18;
@@ -130,7 +130,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(469, 305);
+            this.ClientSize = new System.Drawing.Size(391, 229);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.instructionLabel);
@@ -142,7 +142,7 @@
             this.Controls.Add(this.usernameTextbox);
             this.Controls.Add(this.titleTextbox);
             this.Name = "Entry";
-            this.Text = "Form2";
+            this.Text = "Password Manager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Entry_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
