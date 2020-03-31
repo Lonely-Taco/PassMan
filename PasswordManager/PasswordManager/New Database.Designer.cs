@@ -77,6 +77,7 @@
             this.crte_new_DB_Btn.TabIndex = 4;
             this.crte_new_DB_Btn.Text = "Create new database";
             this.crte_new_DB_Btn.UseVisualStyleBackColor = true;
+            this.crte_new_DB_Btn.Click += new System.EventHandler(this.crte_new_DB_Btn_Click);
             // 
             // cancle_crte_Btn
             // 
