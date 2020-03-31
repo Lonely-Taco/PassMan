@@ -27,7 +27,7 @@ namespace PasswordManager
 
         private void crte_new_DB_Btn_Click(object sender, EventArgs e)
         {
-            //checking for empty fields
+            //check for empty fields
             if (new_DB_text.Text == "" && new_db_pass_text.Text == "")
             {
                 MessageBox.Show("Database name and password can not be empty");
