@@ -15,7 +15,6 @@ namespace PasswordManager
 {
     public partial class new_DB : Form
     {
-
         public new_DB()
         {
             InitializeComponent();
