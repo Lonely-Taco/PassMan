@@ -39,7 +39,7 @@ namespace PasswordManager
 
         private void NewDB_Click(object sender, EventArgs e)
         {
-            dfgsdffgsdfgsdfgdsfg
+            
         }
     }
 }
