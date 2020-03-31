@@ -89,6 +89,7 @@
             this.NewDB.TabIndex = 5;
             this.NewDB.Text = "New Database";
             this.NewDB.UseVisualStyleBackColor = true;
+            this.NewDB.Click += new System.EventHandler(this.NewDB_Click);
             // 
             // Okay_Btn
             // 
