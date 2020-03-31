@@ -16,5 +16,10 @@ namespace PasswordManager
         {
             InitializeComponent();
         }
+
+        private void cancle_crte_Btn_Click(object sender, EventArgs e)
+        {
+            Form
+        }
     }
 }
