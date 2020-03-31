@@ -46,5 +46,19 @@ namespace PasswordManager
             nb.ShowDialog();
             
         }
+
+        private void Choose_Btn_Click(object sender, EventArgs e)
+        {
+          
+            DialogResult result = Choose.ShowDialog();
+            string file = Choose.FileName;   
+         
+           
+        }
+
+        private void Choose_FileOk(object sender, CancelEventArgs e)
+        {
+           
+        }
     }
 }

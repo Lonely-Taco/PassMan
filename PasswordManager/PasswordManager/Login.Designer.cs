@@ -36,6 +36,7 @@
             this.NewDB = new System.Windows.Forms.Button();
             this.Okay_Btn = new System.Windows.Forms.Button();
             this.Cancel_Btn = new System.Windows.Forms.Button();
+            this.Choose = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
             // label1
@@ -81,6 +82,7 @@
             this.Choose_Btn.TabIndex = 4;
             this.Choose_Btn.Text = "choose";
             this.Choose_Btn.UseVisualStyleBackColor = true;
+            this.Choose_Btn.Click += new System.EventHandler(this.Choose_Btn_Click);
             // 
             // NewDB
             // 
@@ -111,6 +113,11 @@
             this.Cancel_Btn.Text = "Cancel";
             this.Cancel_Btn.UseVisualStyleBackColor = true;
             this.Cancel_Btn.Click += new System.EventHandler(this.Cancel_Btn_Click);
+            // 
+            // Choose
+            // 
+            this.Choose.FileName = "Database";
+            this.Choose.FileOk += new System.ComponentModel.CancelEventHandler(this.Choose_FileOk);
             // 
             // Login
             // 
@@ -143,6 +150,7 @@
         private System.Windows.Forms.Button NewDB;
         private System.Windows.Forms.Button Okay_Btn;
         private System.Windows.Forms.Button Cancel_Btn;
+        private System.Windows.Forms.OpenFileDialog Choose;
     }
 }
 
