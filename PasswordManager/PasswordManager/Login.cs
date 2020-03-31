@@ -29,7 +29,8 @@ namespace PasswordManager
 
         private void Cancel_Btn_Click(object sender, EventArgs e)
         {
-
+            dialog_Box b = new dialog_Box();
+            b.ShowDialog();
         }
 
         private void Okay_Btn_Click(object sender, EventArgs e)

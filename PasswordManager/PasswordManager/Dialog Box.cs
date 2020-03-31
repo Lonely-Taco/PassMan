@@ -10,16 +10,16 @@ using System.Windows.Forms;
 
 namespace PasswordManager
 {
-    public partial class new_DB : Form
+    public partial class dialog_Box : Form
     {
-        public new_DB()
+        public dialog_Box()
         {
             InitializeComponent();
         }
 
-        private void cancle_crte_Btn_Click(object sender, EventArgs e)
+        private void OK_Btn_Click(object sender, EventArgs e)
         {
-            
+            Application.Exit();
         }
     }
 }
