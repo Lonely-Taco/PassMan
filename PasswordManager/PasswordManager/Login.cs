@@ -13,7 +13,7 @@ namespace PasswordManager
 {
     public partial class Login : Form
     {
-        String filePath = "C://Users/Ramon Gonzalez/Desktop/database.xml";
+        String filePath = null;
         DB dashboard;
         public Login(DB dashboard)
         {
@@ -34,27 +34,29 @@ namespace PasswordManager
         private void Cancel_Btn_Click(object sender, EventArgs e)
         {
             dialog_Box b = new dialog_Box();
-            b.ShowDialog();
+            b.Show();
         }
 
         private void Okay_Btn_Click(object sender, EventArgs e)
         {
             String pass = MP_Input.Text;
-            dashboard.masterPassword = pass;
-            if (dashboard.UpdateEntryList())
+            if(filePath == null)
             {
-                this.dashboard.successfulLogin();
+                MessageBox.Show("File path cannot be empty");
+            } else if (dashboard.UpdateEntryList(pass))
+            {
+                this.dashboard.successfulLogin(pass, filePath);
             }
             else
             {
-                /*Error message with unsuccesful login pops up */
+                MessageBox.Show("Incorrect master password");
             }
             
         }
 
         private void NewDB_Click(object sender, EventArgs e)
         {
-            new_DB nb = new new_DB();
+            new_DB nb = new new_DB(dashboard);
 
             nb.ShowDialog();
             
@@ -79,7 +81,11 @@ namespace PasswordManager
         private void Choose_FileOk(object sender, CancelEventArgs e)
         {
            
-        }     
+        }
 
+        private void Login_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
