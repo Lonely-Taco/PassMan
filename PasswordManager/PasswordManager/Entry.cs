@@ -18,7 +18,7 @@ namespace PasswordManager
 
         
 
-        public Entry(string title, string username, byte[] password)
+        public Entry(string title, string username, byte[] password, int i)
         {
             this.Title = title;
             this.Username = username;
