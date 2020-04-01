@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 using System.Windows.Forms;
 using System.Windows;
+using System.Xml;
 
 namespace PasswordManager
 {
@@ -79,11 +79,15 @@ namespace PasswordManager
 
         public Entry[] entryTest()
         {
+            Login login = new Login(this);
             Entry[] entrylist = new Entry[20];
-            for (int i = 0; i < 20; i++)
-            {
-                entrylist[i] = new Entry($"title{i}", $"username{i}", encryptor.encryptPassword("masterpassword", $"password{i}"), i);
-            }
+            XmlDocument db = new XmlDocument();
+            db.Load(login.GetFilePath());
+            XmlNode node = db.DocumentElement.SelectSingleNode("taco");
+            string username = node.InnerText.ToString();
+            
+                entrylist[0] = new Entry("title", username, encryptor.encryptPassword("masterpassword", "password"), 1);
+            
            // entrylist[0] = new Entry("title1", "username1", encryptor.encryptPassword("masterpassword", "password1"));
             //entrylist[1] = new Entry("title2", "username2", encryptor.encryptPassword("masterpassword", "password2"));
             //entrylist[2] = new Entry("title3", "username3", encryptor.encryptPassword("masterpassword", "password3"));
