@@ -41,7 +41,7 @@ namespace PasswordManager
         {
             String pass = MP_Input.Text;
             dashboard.masterPassword = pass;
-            if (dashboard.UpdateEntryList(dashboard.entryTest()))
+            if (dashboard.UpdateEntryList())
             {
                 this.dashboard.successfulLogin();
             }
