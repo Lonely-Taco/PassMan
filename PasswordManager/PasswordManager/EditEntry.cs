@@ -45,9 +45,9 @@ namespace PasswordManager
             if (File.Exists("C://Users/Ramon Gonzalez/Desktop/database.xml"))
             {
 
-               // String path = login.GetFilePath();
-                //XDocument xDocument = XDocument.Load(path);
-                XDocument xDocument = XDocument.Load("C://Users/Ramon Gonzalez/Desktop/database.xml");
+               String path = login.GetFilePath();
+               XDocument xDocument = XDocument.Load(path);
+               // XDocument xDocument = XDocument.Load("C://Users/Ramon Gonzalez/Desktop/database.xml");
                 XElement root = xDocument.Element("Database");
                 IEnumerable<XElement> rows = root.Descendants("DatabaseName");
                 XElement firstRow = rows.First();

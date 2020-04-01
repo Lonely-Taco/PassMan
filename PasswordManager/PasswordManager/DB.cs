@@ -51,7 +51,9 @@ namespace PasswordManager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Application.Run(new EditEntry());
+            EditEntry edit = new EditEntry();
+
+            edit.ShowDialog();
         }
     }
 }
