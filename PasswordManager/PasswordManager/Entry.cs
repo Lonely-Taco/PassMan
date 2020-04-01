@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Cryptography;
+using System.IO;
 
 namespace PasswordManager
 {
@@ -10,17 +12,19 @@ namespace PasswordManager
 
     public class Entry
     {
-        private string title { get; }
-        private string username { get; }
-        private string password { get; }
+        public string Title { get; }
+        public string Username { get; }
+        public byte[] EncryptedPassword { set; get; }
 
-        Entry(string title, string username, string password)
+        
+
+        public Entry(string title, string username, byte[] password)
         {
-            this.title = title;
-            this.username = username;
-            this.password = password;
+            this.Title = title;
+            this.Username = username;
+            this.EncryptedPassword = password;
         }
 
-
+        
     }
 }

@@ -15,26 +15,47 @@ namespace PasswordManager
     {
         Login loginScreen;
         bool hasUnsavedChances;
+        Encryptor encryptor;
+        public string masterPassword;
 
         public DB()
         {
             InitializeComponent();
             this.Hide();
             this.hasUnsavedChances = false;
+            encryptor = new Encryptor();
+            masterPassword = null;
             loginScreen = new Login(this);
             Application.Run(loginScreen);
-            
+            UpdateEntryList(entryTest());
         }
 
         public void successfulLogin()
         {
-            loginScreen.Close();
-            this.Show();        
+            loginScreen.Hide();
+            this.Show();
+            //UpdateEntryList(entryTest());
         }
 
-        public void UpdateEntryList(Entry[] entryList)
+        public bool UpdateEntryList(Entry[] entryList)
         {
-            
+            for (int i = 0; i < entryList.Length; i++)
+            {
+                string password = encryptor.decryptPassword(masterPassword, entryList[i].EncryptedPassword);
+                if(password == null)
+                {
+                    return false;
+                }
+                CreateRow(entryList[i].Title, entryList[i].Username, password);
+            }
+            return true;
+        }
+
+        public void CreateRow(string title, string username, string password)
+        {
+            string[] row = { title, username, password};
+            var listViewItem = new ListViewItem(row);
+            listView1.Items.Add(listViewItem);
         }
 
         public void closeApp()
@@ -47,6 +68,17 @@ namespace PasswordManager
             {
                 this.Close();
             }
+        }
+
+        public Entry[] entryTest()
+        {
+            Entry[] entrylist = new Entry[4];
+            entrylist[0] = new Entry("title1", "username1", encryptor.encryptPassword("masterpassword", "password1"));
+            entrylist[1] = new Entry("title2", "username2", encryptor.encryptPassword("masterpassword", "password2"));
+            entrylist[2] = new Entry("title3", "username3", encryptor.encryptPassword("masterpassword", "password3"));
+            entrylist[3] = new Entry("title4", "username4", encryptor.encryptPassword("masterpassword", "password4"));
+
+            return entrylist;
         }
     }
 }

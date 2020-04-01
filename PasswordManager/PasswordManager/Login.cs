@@ -38,8 +38,8 @@ namespace PasswordManager
         private void Okay_Btn_Click(object sender, EventArgs e)
         {
            String pass = MP_Input.Text;
-
-            if(true /*given password is the same as actual password*/)
+            dashboard.masterPassword = pass;
+            if(dashboard.UpdateEntryList(dashboard.entryTest()))
             {
                 this.dashboard.successfulLogin();
             }
