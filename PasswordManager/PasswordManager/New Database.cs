@@ -48,7 +48,7 @@ namespace PasswordManager
                 String DBName = new_DB_text.Text;
                 String Pass = new_db_pass_text.Text;
 
-                using (XmlWriter writer = XmlWriter.Create("C://Users/Ramon Gonzalez/Desktop/"+DBName+".xml"))
+                using (XmlWriter writer = XmlWriter.Create("C://Users/Solomon/Desktop/"+DBName+".xml"))
                 {
                     writer.WriteStartElement("Database");
                     writer.WriteElementString("DatabaseName", DBName);
