@@ -56,7 +56,7 @@ namespace PasswordManager
                    new XElement("Username", userName),
                    new XElement("Password", password)));
 
-                xDocument.Save("C://Users/Ramon Gonzalez/Desktop/database.xml");
+                xDocument.Save("C://Users/Solomon/Desktop/database.xml");
             }
            backToDashboard();
             
