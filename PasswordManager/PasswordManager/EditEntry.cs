@@ -54,10 +54,9 @@ namespace PasswordManager
                 IEnumerable<XElement> rows = root.Descendants("DatabaseName");
                 XElement firstRow = rows.First();
                 firstRow.AddBeforeSelf(
-                   new XElement("Entries",
-                   new XElement("Title", title),
+                   new XElement(title,
                    new XElement("Username", userName),
-                   new XElement("Password", dashboard.encryptPassword(password))));
+                   new XElement("Password", password)));
 
                 xDocument.Save(dashboard.filepath);
             }
