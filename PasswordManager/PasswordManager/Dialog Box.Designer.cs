@@ -37,13 +37,13 @@
             this.dialog_Text.AutoSize = true;
             this.dialog_Text.Location = new System.Drawing.Point(52, 45);
             this.dialog_Text.Name = "dialog_Text";
-            this.dialog_Text.Size = new System.Drawing.Size(22, 13);
+            this.dialog_Text.Size = new System.Drawing.Size(115, 13);
             this.dialog_Text.TabIndex = 0;
-            this.dialog_Text.Text = "OK";
+            this.dialog_Text.Text = "CLOSE APPLICATION";
             // 
             // OK_Btn
             // 
-            this.OK_Btn.Location = new System.Drawing.Point(30, 81);
+            this.OK_Btn.Location = new System.Drawing.Point(67, 76);
             this.OK_Btn.Name = "OK_Btn";
             this.OK_Btn.Size = new System.Drawing.Size(75, 23);
             this.OK_Btn.TabIndex = 1;
@@ -55,7 +55,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(141, 168);
+            this.ClientSize = new System.Drawing.Size(208, 123);
             this.Controls.Add(this.OK_Btn);
             this.Controls.Add(this.dialog_Text);
             this.Name = "dialog_Box";

@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 using System.Collections;
 using System.Windows.Forms;
 using System.Windows;
+using System.Xml;
+using System.IO;
+using System.Xml.Linq;
 
 namespace PasswordManager
 {
@@ -18,7 +21,7 @@ namespace PasswordManager
         bool hasUnsavedChances;
         Encryptor encryptor;
         public string masterPassword;
-        Entry[] entryList;
+        ArrayList entryList;
 
         public DB()
         {
@@ -82,12 +85,35 @@ namespace PasswordManager
             {
                 entrylist[i] = new Entry($"title{0}", $"username{0}", encryptor.encryptPassword("masterpassword", $"password{0}"), i);
             }
-           // entrylist[0] = new Entry("title1", "username1", encryptor.encryptPassword("masterpassword", "password1"));
+
+            
+            // entrylist[0] = new Entry("title1", "username1", encryptor.encryptPassword("masterpassword", "password1"));
             //entrylist[1] = new Entry("title2", "username2", encryptor.encryptPassword("masterpassword", "password2"));
             //entrylist[2] = new Entry("title3", "username3", encryptor.encryptPassword("masterpassword", "password3"));
             //entrylist[3] = new Entry("title4", "username4", encryptor.encryptPassword("masterpassword", "password4"));
 
             return entrylist;
+        }
+
+        public ArrayList entries()
+        {
+            XmlTextReader xReader = new XmlTextReader("d:\\product.xml");
+            while (xReader.Read())
+            {
+                int i = 0;
+                switch (xReader.NodeType)
+                {
+                    case XmlNodeType.Element:
+                        entryList.Items.Add("<" + xReader.Name + ">");
+                        break;
+                    case XmlNodeType.Text:
+                        entryLis.Items.Add(xReader.Value);
+                        break;
+                    case XmlNodeType.EndElement:
+                        entryList.Items.Add("");
+                        break;
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
