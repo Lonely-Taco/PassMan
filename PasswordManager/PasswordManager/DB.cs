@@ -28,7 +28,7 @@ namespace PasswordManager
             this.Hide();
             encryptor = new Encryptor();
             masterPassword = null;
-            entryList = entryTest();
+            
             loginScreen = new Login(this);
 
             Application.Run(loginScreen);
@@ -50,8 +50,8 @@ namespace PasswordManager
             loginScreen.Hide();
             this.Show();
             this.filepath = filepath;
+            entryList = entryTest(filepath);
             UpdateEntryList(masterPassword);
-
         }
 
         public bool UpdateEntryList(string masterPassword)
@@ -76,7 +76,7 @@ namespace PasswordManager
         }
 
 
-        public Entry[] entryTest()
+        public Entry[] entryTest(string filepath)
         {
             Entry[] entrylist = new Entry[20];
             int i = 0;
@@ -90,7 +90,7 @@ namespace PasswordManager
             //entrylist[3] = new Entry("title4", "username4", encryptor.encryptPassword("masterpassword", "password4"));
 
             StringBuilder result = new StringBuilder();
-            foreach (XElement level1Element in XElement.Load("C://Users/Solomon/Desktop/database.xml").Elements("Database"))
+            foreach (XElement level1Element in XElement.Load(filepath).Elements("Database"))
             {
                 result.AppendLine(level1Element.Attribute("Mrsdks").Value);
                 foreach (XElement level2Element in level1Element.Elements("Mrsdks"))

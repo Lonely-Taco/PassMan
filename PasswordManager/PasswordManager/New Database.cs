@@ -51,7 +51,7 @@ namespace PasswordManager
                 String Pass = new_db_pass_text.Text;
 
 
-                using (XmlWriter writer = XmlWriter.Create("C://Users/Solomon/Desktop/"+DBName+".xml"))
+               
 
                 var folderBrowserDialog = new FolderBrowserDialog();
                 DialogResult result = folderBrowserDialog.ShowDialog();

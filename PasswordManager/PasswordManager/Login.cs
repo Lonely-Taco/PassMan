@@ -40,17 +40,24 @@ namespace PasswordManager
         private void Okay_Btn_Click(object sender, EventArgs e)
         {
             String pass = MP_Input.Text;
+            
             if(filePath == null)
             {
                 MessageBox.Show("File path cannot be empty");
-            } else if (dashboard.UpdateEntryList(pass))
+            } else
             {
-                this.dashboard.successfulLogin(pass, filePath);
+                dashboard.entryTest(filePath);
+                if (dashboard.UpdateEntryList(pass))
+                {
+                    this.dashboard.successfulLogin(pass, filePath);
+                }
+                else
+                {
+                    MessageBox.Show("Incorrect master password");
+                }
             }
-            else
-            {
-                MessageBox.Show("Incorrect master password");
-            }
+            
+            
             
         }
 
