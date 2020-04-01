@@ -9,9 +9,6 @@ using System.Threading.Tasks;
 using System.Collections;
 using System.Windows.Forms;
 using System.Windows;
-using System.Xml;
-using System.IO;
-using System.Xml.Linq;
 
 namespace PasswordManager
 {
@@ -21,7 +18,7 @@ namespace PasswordManager
         bool hasUnsavedChances;
         Encryptor encryptor;
         public string masterPassword;
-        ArrayList entryList;
+        Entry[] entryList;
 
         public DB()
         {
@@ -83,11 +80,9 @@ namespace PasswordManager
             Entry[] entrylist = new Entry[20];
             for (int i = 0; i < 20; i++)
             {
-                entrylist[i] = new Entry($"title{0}", $"username{0}", encryptor.encryptPassword("masterpassword", $"password{0}"), i);
+                entrylist[i] = new Entry($"title{i}", $"username{i}", encryptor.encryptPassword("masterpassword", $"password{i}"), i);
             }
-
-            
-            // entrylist[0] = new Entry("title1", "username1", encryptor.encryptPassword("masterpassword", "password1"));
+           // entrylist[0] = new Entry("title1", "username1", encryptor.encryptPassword("masterpassword", "password1"));
             //entrylist[1] = new Entry("title2", "username2", encryptor.encryptPassword("masterpassword", "password2"));
             //entrylist[2] = new Entry("title3", "username3", encryptor.encryptPassword("masterpassword", "password3"));
             //entrylist[3] = new Entry("title4", "username4", encryptor.encryptPassword("masterpassword", "password4"));
@@ -95,26 +90,7 @@ namespace PasswordManager
             return entrylist;
         }
 
-        public ArrayList entries()
-        {
-            XmlTextReader xReader = new XmlTextReader("d:\\product.xml");
-            while (xReader.Read())
-            {
-                int i = 0;
-                switch (xReader.NodeType)
-                {
-                    case XmlNodeType.Element:
-                        entryList.Items.Add("<" + xReader.Name + ">");
-                        break;
-                    case XmlNodeType.Text:
-                        entryLis.Items.Add(xReader.Value);
-                        break;
-                    case XmlNodeType.EndElement:
-                        entryList.Items.Add("");
-                        break;
-                }
-            }
-        }
+      
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -130,7 +106,7 @@ namespace PasswordManager
                 if (listView1.FocusedItem.Bounds.Contains(e.Location))
                 {
                     contextMenuStrip1.Items[0].Text = entryList[int.Parse(listView1.FocusedItem.Text)].Title;
-                    contextMenuStrip1.Items[5].Text = encryptor.decryptPassword(masterPassword, entryList[int.Parse(listView1.FocusedItem.Text)].EncryptedPassword);
+                    contextMenuStrip1.Items[5].Text = listView1.FocusedItem.Text;
                     contextMenuStrip1.Show(Cursor.Position);
                     
                 }
@@ -139,12 +115,15 @@ namespace PasswordManager
 
         private void copyPasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.Clipboard.SetText(contextMenuStrip1.Items[5].Text);
+            System.Windows.Forms.Clipboard.SetText(encryptor.decryptPassword(masterPassword, entryList[int.Parse(contextMenuStrip1.Items[5].Text)].EncryptedPassword));
         }
 
         private void editEntryToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Entry entryEdited = entryList[int.Parse(contextMenuStrip1.Items[5].Text)];
 
+            EditEntry editEntry = new EditEntry(entryEdited.Title, entryEdited.Username, encryptor.decryptPassword(masterPassword, entryEdited.EncryptedPassword));
+            editEntry.ShowDialog();
         }
 
         private void deleteEntryToolStripMenuItem_Click(object sender, EventArgs e)
