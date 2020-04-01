@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 using System.Windows.Forms;
+using System.Windows;
 
 namespace PasswordManager
 {
@@ -17,6 +18,7 @@ namespace PasswordManager
         bool hasUnsavedChances;
         Encryptor encryptor;
         public string masterPassword;
+        Entry[] entryList;
 
         public DB()
         {
@@ -25,9 +27,12 @@ namespace PasswordManager
             this.hasUnsavedChances = false;
             encryptor = new Encryptor();
             masterPassword = null;
+            entryList = entryTest();
             loginScreen = new Login(this);
+
             Application.Run(loginScreen);
-            UpdateEntryList(entryTest());
+            
+            //UpdateEntryList();
         }
 
         public void successfulLogin()
@@ -37,7 +42,7 @@ namespace PasswordManager
             //UpdateEntryList(entryTest());
         }
 
-        public bool UpdateEntryList(Entry[] entryList)
+        public bool UpdateEntryList()
         {
             for (int i = 0; i < entryList.Length; i++)
             {
@@ -46,14 +51,14 @@ namespace PasswordManager
                 {
                     return false;
                 }
-                CreateRow(entryList[i].Title, entryList[i].Username, password);
+                CreateRow(i, entryList[i].Title, entryList[i].Username, password);
             }
             return true;
         }
 
-        public void CreateRow(string title, string username, string password)
+        public void CreateRow(int i, string title, string username, string password)
         {
-            string[] row = { title, username, password};
+            string[] row = { i.ToString(), title, username, password};
             var listViewItem = new ListViewItem(row);
             listView1.Items.Add(listViewItem);
         }
@@ -86,6 +91,35 @@ namespace PasswordManager
             EditEntry edit = new EditEntry();
 
             edit.ShowDialog();
+        }
+
+        private void listView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                if (listView1.FocusedItem.Bounds.Contains(e.Location))
+                {
+                    contextMenuStrip1.Items[0].Text = entryList[int.Parse(listView1.FocusedItem.Text)].Title;
+                    contextMenuStrip1.Items[5].Text = encryptor.decryptPassword(masterPassword, entryList[int.Parse(listView1.FocusedItem.Text)].EncryptedPassword);
+                    contextMenuStrip1.Show(Cursor.Position);
+                    
+                }
+            }
+        }
+
+        private void copyPasswordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Windows.Forms.Clipboard.SetText(contextMenuStrip1.Items[5].Text);
+        }
+
+        private void editEntryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void deleteEntryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
