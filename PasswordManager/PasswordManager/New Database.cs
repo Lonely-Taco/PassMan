@@ -49,9 +49,14 @@ namespace PasswordManager
             { 
                 String DBName = new_DB_text.Text;
                 String Pass = new_db_pass_text.Text;
+
+
+                using (XmlWriter writer = XmlWriter.Create("C://Users/Solomon/Desktop/"+DBName+".xml"))
+
                 var folderBrowserDialog = new FolderBrowserDialog();
                 DialogResult result = folderBrowserDialog.ShowDialog();
                 if (result == DialogResult.OK)
+
                 {
                     string folderName = folderBrowserDialog.SelectedPath;
                     string filePath = folderName + "/" + DBName + ".xml";
