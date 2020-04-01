@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace PasswordManager
 {
     public partial class Login : Form
     {
+        String filePath = "C://Users/Ramon Gonzalez/Desktop/database.xml";
         DB dashboard;
         public Login(DB dashboard)
         {
@@ -37,9 +39,9 @@ namespace PasswordManager
 
         private void Okay_Btn_Click(object sender, EventArgs e)
         {
-           String pass = MP_Input.Text;
+           String pass = "test";
 
-            if(true /*given password is the same as actual password*/)
+            if(pass == "test" )
             {
                 this.dashboard.successfulLogin();
             }
@@ -63,11 +65,17 @@ namespace PasswordManager
         {
           
             DialogResult result = Choose.ShowDialog();
-            string file = Choose.FileName;
-            pathText.Text = file;
+            filePath = Choose.FileName;
+            label2.Text = filePath;
+            
+
+
 
         }
-
+        public String GetFilePath()
+        {
+            return this.filePath;
+        }
         private void Choose_FileOk(object sender, CancelEventArgs e)
         {
            

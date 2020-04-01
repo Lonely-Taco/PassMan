@@ -28,7 +28,7 @@ namespace PasswordManager
 
         public void successfulLogin()
         {
-            loginScreen.Close();
+            loginScreen.Hide();
             this.Show();        
         }
 
@@ -47,6 +47,11 @@ namespace PasswordManager
             {
                 this.Close();
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Application.Run(new EditEntry());
         }
     }
 }
