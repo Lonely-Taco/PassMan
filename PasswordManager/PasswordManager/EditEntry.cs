@@ -24,14 +24,15 @@ namespace PasswordManager
 
         }
 
-        public EditEntry(string title, string username, string password)
+        public EditEntry(string title, string username, string password, DB dashboard)
         {
             InitializeComponent();
             titleTextbox.Text = title;
             usernameTextbox.Text = username;
             passwordTextbox.Text = password;
             instructionLabel.Text = "Editing entry";
-           
+            this.dashboard = dashboard;
+
         }
 
         private void saveButton_Click(object sender, EventArgs e)

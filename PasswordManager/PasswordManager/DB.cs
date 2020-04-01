@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 using System.Windows.Forms;
 using System.Windows;
 using System.Xml;
+using System.Xml.Linq;
 
 namespace PasswordManager
 {
@@ -17,7 +19,7 @@ namespace PasswordManager
         Login loginScreen;
         Encryptor encryptor;
         private string masterPassword;
-        Entry[] entryList;
+        public Entry[] entryList { get; set; }
         public string filepath { get; set; }
 
         public DB()
@@ -26,12 +28,10 @@ namespace PasswordManager
             this.Hide();
             encryptor = new Encryptor();
             masterPassword = null;
-            entryList = entryTest();
+            
             loginScreen = new Login(this);
 
             Application.Run(loginScreen);
-            
-            //UpdateEntryList();
         }
 
  
@@ -42,7 +42,6 @@ namespace PasswordManager
             this.Show();
             this.masterPassword = masterPassword;
             this.filepath = filepath;
-            //UpdateEntryList(entryTest());
         }
 
         public void successfulCreation(string masterPassword, string filepath)
@@ -51,8 +50,8 @@ namespace PasswordManager
             loginScreen.Hide();
             this.Show();
             this.filepath = filepath;
+            entryList = entryTest(filepath);
             UpdateEntryList(masterPassword);
-
         }
 
         public bool UpdateEntryList(string masterPassword)
@@ -77,21 +76,30 @@ namespace PasswordManager
         }
 
 
-        public Entry[] entryTest()
+        public Entry[] entryTest(string filepath)
         {
-            Login login = new Login(this);
             Entry[] entrylist = new Entry[20];
-            XmlDocument db = new XmlDocument();
-            db.Load(login.GetFilePath());
-            XmlNode node = db.DocumentElement.SelectSingleNode("taco");
-            string username = node.InnerText.ToString();
-            
-                entrylist[0] = new Entry("title", username, encryptor.encryptPassword("masterpassword", "password"), 1);
-            
-           // entrylist[0] = new Entry("title1", "username1", encryptor.encryptPassword("masterpassword", "password1"));
+            int i = 0;
+            for (i = 0; i < 20; i++)
+            {
+                entrylist[i] = new Entry($"title{i}", $"username{i}", encryptor.encryptPassword("masterpassword", $"password{i}"), i);
+            }
+            // entrylist[0] = new Entry("title1", "username1", encryptor.encryptPassword("masterpassword", "password1"));
             //entrylist[1] = new Entry("title2", "username2", encryptor.encryptPassword("masterpassword", "password2"));
             //entrylist[2] = new Entry("title3", "username3", encryptor.encryptPassword("masterpassword", "password3"));
             //entrylist[3] = new Entry("title4", "username4", encryptor.encryptPassword("masterpassword", "password4"));
+            MessageBox.Show(filepath);
+            StringBuilder result = new StringBuilder();
+            foreach (XElement level1Element in XElement.Load(filepath).Elements("Database"))
+            {
+                result.AppendLine(level1Element.Attribute("Mrsdks").Value);
+                foreach (XElement level2Element in level1Element.Elements("Mrsdks"))
+                {
+                    result.AppendLine("  " + level2Element.Attribute("Username").Value);
+                    result.AppendLine("  " + level2Element.Attribute("Password").Value);
+                }
+            }
+            MessageBox.Show(result.ToString());
 
             return entrylist;
         }
@@ -114,7 +122,7 @@ namespace PasswordManager
                     contextMenuStrip1.Items[0].Text = entryList[int.Parse(listView1.FocusedItem.Text)].Title;
                     contextMenuStrip1.Items[5].Text = listView1.FocusedItem.Text;
                     contextMenuStrip1.Show(Cursor.Position);
-                    
+
                 }
             }
         }
@@ -129,15 +137,24 @@ namespace PasswordManager
             label1.Text = "editing";
             Entry entryEdited = entryList[int.Parse(contextMenuStrip1.Items[5].Text)];
 
-            EditEntry editEntry = new EditEntry(entryEdited.Title, entryEdited.Username, encryptor.decryptPassword(masterPassword, entryEdited.EncryptedPassword));
+            EditEntry editEntry = new EditEntry(entryEdited.Title, entryEdited.Username, encryptor.decryptPassword(masterPassword, entryEdited.EncryptedPassword), this);
             editEntry.ShowDialog();
         }
 
         private void deleteEntryToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DeleteWarning deleteWarning = new DeleteWarning(this, int.Parse(contextMenuStrip1.Items[5].Text));
+            deleteWarning.Show();
+
             
         }
 
-        
+        public void deleteEntry(int entryNumber)
+        {
+            MessageBox.Show("Deleting entry number " + entryNumber);
+            //delete entryList[entryNumber]
+        }
+
+    
     }
 }
