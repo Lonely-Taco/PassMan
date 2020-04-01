@@ -13,7 +13,7 @@ namespace PasswordManager
 {
     public partial class Login : Form
     {
-        String filePath = "C://Users/Ramon Gonzalez/Desktop/database.xml";
+        String filePath = null;
         DB dashboard;
         public Login(DB dashboard)
         {

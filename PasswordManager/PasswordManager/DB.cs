@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Windows;
 using System.Xml;
 using System.Xml.Linq;
+using System.IO;
 
 namespace PasswordManager
 {
@@ -34,7 +35,10 @@ namespace PasswordManager
             Application.Run(loginScreen);
         }
 
- 
+        public string encryptPassword(string password)
+        {
+            return Encoding.ASCII.GetString(encryptor.encryptPassword(masterPassword, password));
+        }
 
         public void successfulLogin(string masterPassword, string filepath)
         {
@@ -75,32 +79,24 @@ namespace PasswordManager
             listView1.Items.Add(listViewItem);
         }
 
-
         public Entry[] entryTest(string filepath)
         {
-            Entry[] entrylist = new Entry[20];
-            int i = 0;
-            for (i = 0; i < 20; i++)
+            XmlDataDocument xmldoc = new XmlDataDocument();
+            XmlNodeList xmlnode;
+            string str = null;
+            FileStream fs = new FileStream(filepath, FileMode.Open, FileAccess.Read);
+            xmldoc.Load(fs);
+            xmlnode = xmldoc.GetElementsByTagName("Entries");
+            Entry[] entrylist = new Entry[xmlnode.Count];
+            for (int i = 0; i <= xmlnode.Count - 1; i++)
             {
-                entrylist[i] = new Entry($"title{i}", $"username{i}", encryptor.encryptPassword("masterpassword", $"password{i}"), i);
+                xmlnode[i].ChildNodes.Item(0).InnerText.Trim();
+                str = xmlnode[i].ChildNodes.Item(0).InnerText.Trim() + "  " + xmlnode[i].ChildNodes.Item(1).InnerText.Trim() + "  " + xmlnode[i].ChildNodes.Item(2).InnerText.Trim();
+                entrylist[i] = new Entry(xmlnode[i].ChildNodes.Item(0).InnerText.Trim(), xmlnode[i].ChildNodes.Item(1).InnerText.Trim(), Encoding.ASCII.GetBytes(xmlnode[i].ChildNodes.Item(2).InnerText.Trim()), i);
+                //MessageBox.Show(entryList[i].Title + ", " + entryList[i].Username + ", " + entryList[i].EncryptedPassword);
+                //MessageBox.Show(entrylist.Length.ToString());
             }
-            // entrylist[0] = new Entry("title1", "username1", encryptor.encryptPassword("masterpassword", "password1"));
-            //entrylist[1] = new Entry("title2", "username2", encryptor.encryptPassword("masterpassword", "password2"));
-            //entrylist[2] = new Entry("title3", "username3", encryptor.encryptPassword("masterpassword", "password3"));
-            //entrylist[3] = new Entry("title4", "username4", encryptor.encryptPassword("masterpassword", "password4"));
-            MessageBox.Show(filepath);
-            StringBuilder result = new StringBuilder();
-            foreach (XElement level1Element in XElement.Load(filepath).Elements("Database"))
-            {
-                result.AppendLine(level1Element.Attribute("Mrsdks").Value);
-                foreach (XElement level2Element in level1Element.Elements("Mrsdks"))
-                {
-                    result.AppendLine("  " + level2Element.Attribute("Username").Value);
-                    result.AppendLine("  " + level2Element.Attribute("Password").Value);
-                }
-            }
-            MessageBox.Show(result.ToString());
-
+            fs.Close();
             return entrylist;
         }
 
