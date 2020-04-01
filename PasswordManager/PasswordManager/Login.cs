@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,9 +64,14 @@ namespace PasswordManager
         {
           
             DialogResult result = Choose.ShowDialog();
-            string file = Choose.FileName;   
-         
-           
+            string file = Choose.FileName;
+            Choose_Btn.Text = file;
+            string text = File.ReadAllText(file);
+            //label2.Text = text;
+            
+
+
+
         }
 
         private void Choose_FileOk(object sender, CancelEventArgs e)

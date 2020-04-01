@@ -37,6 +37,7 @@
             this.Okay_Btn = new System.Windows.Forms.Button();
             this.Cancel_Btn = new System.Windows.Forms.Button();
             this.Choose = new System.Windows.Forms.OpenFileDialog();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -119,11 +120,21 @@
             this.Choose.FileName = "Database";
             this.Choose.FileOk += new System.ComponentModel.CancelEventHandler(this.Choose_FileOk);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(340, 23);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "label2";
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(565, 208);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.Cancel_Btn);
             this.Controls.Add(this.Okay_Btn);
             this.Controls.Add(this.NewDB);
@@ -151,6 +162,7 @@
         private System.Windows.Forms.Button Okay_Btn;
         private System.Windows.Forms.Button Cancel_Btn;
         private System.Windows.Forms.OpenFileDialog Choose;
+        private System.Windows.Forms.Label label2;
     }
 }
 
