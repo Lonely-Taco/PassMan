@@ -30,8 +30,6 @@ namespace PasswordManager
             loginScreen = new Login(this);
 
             Application.Run(loginScreen);
-            
-            //UpdateEntryList();
         }
 
  
@@ -42,7 +40,6 @@ namespace PasswordManager
             this.Show();
             this.masterPassword = masterPassword;
             this.filepath = filepath;
-            //UpdateEntryList(entryTest());
         }
 
         public void successfulCreation(string masterPassword, string filepath)
@@ -110,7 +107,7 @@ namespace PasswordManager
                     contextMenuStrip1.Items[0].Text = entryList[int.Parse(listView1.FocusedItem.Text)].Title;
                     contextMenuStrip1.Items[5].Text = listView1.FocusedItem.Text;
                     contextMenuStrip1.Show(Cursor.Position);
-                    
+
                 }
             }
         }
@@ -125,7 +122,7 @@ namespace PasswordManager
             label1.Text = "editing";
             Entry entryEdited = entryList[int.Parse(contextMenuStrip1.Items[5].Text)];
 
-            EditEntry editEntry = new EditEntry(entryEdited.Title, entryEdited.Username, encryptor.decryptPassword(masterPassword, entryEdited.EncryptedPassword));
+            EditEntry editEntry = new EditEntry(entryEdited.Title, entryEdited.Username, encryptor.decryptPassword(masterPassword, entryEdited.EncryptedPassword), this);
             editEntry.ShowDialog();
         }
 
@@ -135,5 +132,7 @@ namespace PasswordManager
         }
 
         
+
+    
     }
 }
