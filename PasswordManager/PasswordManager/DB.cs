@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Collections;
 using System.Windows.Forms;
 using System.Windows;
+using System.Xml.Linq;
+using System.IO;
 
 namespace PasswordManager
 {
@@ -19,6 +21,7 @@ namespace PasswordManager
         Encryptor encryptor;
         public string masterPassword;
         Entry[] entryList;
+        
 
         public DB()
         {
@@ -29,7 +32,7 @@ namespace PasswordManager
             masterPassword = null;
             entryList = entryTest();
             loginScreen = new Login(this);
-
+            
             Application.Run(loginScreen);
             
             //UpdateEntryList();
@@ -77,12 +80,16 @@ namespace PasswordManager
 
         public Entry[] entryTest()
         {
+           loginScreen = new Login(this);
+
+
             Entry[] entrylist = new Entry[20];
             for (int i = 0; i < 20; i++)
             {
+                XmlReadMode
                 entrylist[i] = new Entry($"title{i}", $"username{i}", encryptor.encryptPassword("masterpassword", $"password{i}"), i);
             }
-           // entrylist[0] = new Entry("title1", "username1", encryptor.encryptPassword("masterpassword", "password1"));
+            // entrylist[0] = new Entry("title1", "username1", encryptor.encryptPassword("masterpassword", "password1"));
             //entrylist[1] = new Entry("title2", "username2", encryptor.encryptPassword("masterpassword", "password2"));
             //entrylist[2] = new Entry("title3", "username3", encryptor.encryptPassword("masterpassword", "password3"));
             //entrylist[3] = new Entry("title4", "username4", encryptor.encryptPassword("masterpassword", "password4"));
@@ -90,7 +97,7 @@ namespace PasswordManager
             return entrylist;
         }
 
-      
+              
 
         private void button1_Click(object sender, EventArgs e)
         {
