@@ -39,7 +39,7 @@
             // label_DB_name
             // 
             this.label_DB_name.AutoSize = true;
-            this.label_DB_name.Location = new System.Drawing.Point(87, 44);
+            this.label_DB_name.Location = new System.Drawing.Point(87, 47);
             this.label_DB_name.Name = "label_DB_name";
             this.label_DB_name.Size = new System.Drawing.Size(82, 13);
             this.label_DB_name.TabIndex = 0;
@@ -48,7 +48,7 @@
             // label_Password
             // 
             this.label_Password.AutoSize = true;
-            this.label_Password.Location = new System.Drawing.Point(87, 80);
+            this.label_Password.Location = new System.Drawing.Point(87, 83);
             this.label_Password.Name = "label_Password";
             this.label_Password.Size = new System.Drawing.Size(53, 13);
             this.label_Password.TabIndex = 1;
@@ -71,11 +71,11 @@
             // 
             // crte_new_DB_Btn
             // 
-            this.crte_new_DB_Btn.Location = new System.Drawing.Point(249, 128);
+            this.crte_new_DB_Btn.Location = new System.Drawing.Point(249, 124);
             this.crte_new_DB_Btn.Name = "crte_new_DB_Btn";
             this.crte_new_DB_Btn.Size = new System.Drawing.Size(146, 23);
             this.crte_new_DB_Btn.TabIndex = 4;
-            this.crte_new_DB_Btn.Text = "Create new database";
+            this.crte_new_DB_Btn.Text = "Select folder and create";
             this.crte_new_DB_Btn.UseVisualStyleBackColor = true;
             this.crte_new_DB_Btn.Click += new System.EventHandler(this.crte_new_DB_Btn_Click);
             // 

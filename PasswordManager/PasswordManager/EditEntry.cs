@@ -41,7 +41,8 @@ namespace PasswordManager
             String userName = usernameTextbox.Text;
             String password = passwordTextbox.Text;
             Login login = new Login(dashboard);
-            String path = login.GetFilePath();
+            String path = dashboard.filepath;
+            MessageBox.Show(path);
             if (File.Exists(path))
             {
 
@@ -56,7 +57,7 @@ namespace PasswordManager
                    new XElement("Username", userName),
                    new XElement("Password", password)));
 
-                xDocument.Save("C://Users/Solomon/Desktop/database.xml");
+                xDocument.Save(dashboard.filepath);
             }
            backToDashboard();
             

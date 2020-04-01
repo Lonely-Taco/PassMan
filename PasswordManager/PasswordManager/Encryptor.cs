@@ -123,7 +123,6 @@ namespace PasswordManager
             }
             catch
             {
-                MessageBox.Show("Incorrect masterpassword");
                 return null;
             }
             
