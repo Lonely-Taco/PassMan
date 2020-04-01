@@ -19,7 +19,7 @@ namespace PasswordManager
         Login loginScreen;
         Encryptor encryptor;
         private string masterPassword;
-        Entry[] entryList;
+        public Entry[] entryList { get; set; }
         public string filepath { get; set; }
 
         public DB()

@@ -46,7 +46,7 @@ namespace PasswordManager
                 MessageBox.Show("File path cannot be empty");
             } else
             {
-                dashboard.entryTest(filePath);
+                dashboard.entryList = dashboard.entryTest(filePath);
                 if (dashboard.UpdateEntryList(pass))
                 {
                     this.dashboard.successfulLogin(pass, filePath);
