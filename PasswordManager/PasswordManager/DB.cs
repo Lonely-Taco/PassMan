@@ -90,6 +90,8 @@ namespace PasswordManager
             return entrylist;
         }
 
+      
+
         private void button1_Click(object sender, EventArgs e)
         {
             EditEntry edit = new EditEntry(this);
@@ -104,7 +106,7 @@ namespace PasswordManager
                 if (listView1.FocusedItem.Bounds.Contains(e.Location))
                 {
                     contextMenuStrip1.Items[0].Text = entryList[int.Parse(listView1.FocusedItem.Text)].Title;
-                    contextMenuStrip1.Items[5].Text = encryptor.decryptPassword(masterPassword, entryList[int.Parse(listView1.FocusedItem.Text)].EncryptedPassword);
+                    contextMenuStrip1.Items[5].Text = listView1.FocusedItem.Text;
                     contextMenuStrip1.Show(Cursor.Position);
                     
                 }
@@ -113,12 +115,15 @@ namespace PasswordManager
 
         private void copyPasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.Clipboard.SetText(contextMenuStrip1.Items[5].Text);
+            System.Windows.Forms.Clipboard.SetText(encryptor.decryptPassword(masterPassword, entryList[int.Parse(contextMenuStrip1.Items[5].Text)].EncryptedPassword));
         }
 
         private void editEntryToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Entry entryEdited = entryList[int.Parse(contextMenuStrip1.Items[5].Text)];
 
+            EditEntry editEntry = new EditEntry(entryEdited.Title, entryEdited.Username, encryptor.decryptPassword(masterPassword, entryEdited.EncryptedPassword));
+            editEntry.ShowDialog();
         }
 
         private void deleteEntryToolStripMenuItem_Click(object sender, EventArgs e)
