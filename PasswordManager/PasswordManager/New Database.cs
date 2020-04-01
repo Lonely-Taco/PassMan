@@ -50,9 +50,6 @@ namespace PasswordManager
                 String DBName = new_DB_text.Text;
                 String Pass = new_db_pass_text.Text;
 
-
-               
-
                 var folderBrowserDialog = new FolderBrowserDialog();
                 DialogResult result = folderBrowserDialog.ShowDialog();
                 if (result == DialogResult.OK)
