@@ -126,7 +126,7 @@
             this.titleTextbox.Size = new System.Drawing.Size(208, 20);
             this.titleTextbox.TabIndex = 10;
             // 
-            // Entry
+            // EditEntry
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -141,7 +141,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.usernameTextbox);
             this.Controls.Add(this.titleTextbox);
-            this.Name = "Entry";
+            this.Name = "EditEntry";
             this.Text = "Password Manager";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Entry_FormClosing);
             this.ResumeLayout(false);
