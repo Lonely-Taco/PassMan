@@ -27,16 +27,45 @@ namespace PasswordManager
 
         private void crte_new_DB_Btn_Click(object sender, EventArgs e)
         {
-            String DBName = new_DB_text.Text;
-            String Pass = new_db_pass_text.Text;
-            using (XmlWriter writer = XmlWriter.Create("C://Users/thoma/Desktop/database.xml"))
+            //check for empty fields
+            if (new_DB_text.Text == "" && new_db_pass_text.Text == "")
             {
-                writer.WriteStartElement("Database"); 
-                writer.WriteElementString("DatabaseName", DBName);
-                writer.WriteElementString("DatabasePASS", Pass);
-                writer.WriteEndElement();
-                writer.Flush();
+                MessageBox.Show("Database name and password can not be empty");
             }
+
+            else if (new_DB_text.Text == "")
+            {
+                MessageBox.Show("Database name cannot be empty");
+            }
+
+            else if (new_db_pass_text.Text == "")
+            {
+                MessageBox.Show("Password cannot be empty");
+            }
+
+            else
+            { 
+                String DBName = new_DB_text.Text;
+                String Pass = new_db_pass_text.Text;
+
+                using (XmlWriter writer = XmlWriter.Create("C://Users/Solomon/Desktop/database.xml"))
+                {
+                    writer.WriteStartElement("Database");
+                    writer.WriteElementString("DatabaseName", DBName);
+                    writer.WriteElementString("DatabasePASS", Pass);
+                    writer.WriteEndElement();
+                    writer.Flush();
+                    MessageBox.Show("Database created successfully");
+                    clearText();
+                }
+           }
+
+        }
+
+        public void clearText()
+        {
+            new_DB_text.Text = "";
+            new_db_pass_text.Text = "";
 
         }
     }
