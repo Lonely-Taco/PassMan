@@ -17,16 +17,15 @@ namespace PasswordManager
     public partial class DB : Form
     {
         Login loginScreen;
-        bool hasUnsavedChances;
         Encryptor encryptor;
-        public string masterPassword;
+        private string masterPassword;
         Entry[] entryList;
+        public string filepath { get; set; }
 
         public DB()
         {
             InitializeComponent();
             this.Hide();
-            this.hasUnsavedChances = false;
             encryptor = new Encryptor();
             masterPassword = null;
             entryList = entryTest();
@@ -37,14 +36,28 @@ namespace PasswordManager
             //UpdateEntryList();
         }
 
-        public void successfulLogin()
+ 
+
+        public void successfulLogin(string masterPassword, string filepath)
         {
             loginScreen.Hide();
             this.Show();
+            this.masterPassword = masterPassword;
+            this.filepath = filepath;
             //UpdateEntryList(entryTest());
         }
 
-        public bool UpdateEntryList()
+        public void successfulCreation(string masterPassword, string filepath)
+        {
+            this.masterPassword = masterPassword;
+            loginScreen.Hide();
+            this.Show();
+            this.filepath = filepath;
+            UpdateEntryList(masterPassword);
+
+        }
+
+        public bool UpdateEntryList(string masterPassword)
         {
             for (int i = 0; i < entryList.Length; i++)
             {
@@ -65,17 +78,6 @@ namespace PasswordManager
             listView1.Items.Add(listViewItem);
         }
 
-        public void closeApp()
-        {
-            if (hasUnsavedChances)
-            {
-                /* Popup window asking if you want to save unsaved chances*/
-            }
-            else
-            {
-                this.Close();
-            }
-        }
 
         public Entry[] entryTest()
         {
@@ -105,6 +107,8 @@ namespace PasswordManager
             return entrylist;
         }
 
+      
+
         private void button1_Click(object sender, EventArgs e)
         {
             EditEntry edit = new EditEntry(this);
@@ -119,7 +123,7 @@ namespace PasswordManager
                 if (listView1.FocusedItem.Bounds.Contains(e.Location))
                 {
                     contextMenuStrip1.Items[0].Text = entryList[int.Parse(listView1.FocusedItem.Text)].Title;
-                    contextMenuStrip1.Items[5].Text = encryptor.decryptPassword(masterPassword, entryList[int.Parse(listView1.FocusedItem.Text)].EncryptedPassword);
+                    contextMenuStrip1.Items[5].Text = listView1.FocusedItem.Text;
                     contextMenuStrip1.Show(Cursor.Position);
                     
                 }
@@ -128,17 +132,23 @@ namespace PasswordManager
 
         private void copyPasswordToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Windows.Forms.Clipboard.SetText(contextMenuStrip1.Items[5].Text);
+            System.Windows.Forms.Clipboard.SetText(encryptor.decryptPassword(masterPassword, entryList[int.Parse(contextMenuStrip1.Items[5].Text)].EncryptedPassword));
         }
 
         private void editEntryToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            label1.Text = "editing";
+            Entry entryEdited = entryList[int.Parse(contextMenuStrip1.Items[5].Text)];
 
+            EditEntry editEntry = new EditEntry(entryEdited.Title, entryEdited.Username, encryptor.decryptPassword(masterPassword, entryEdited.EncryptedPassword));
+            editEntry.ShowDialog();
         }
 
         private void deleteEntryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            
         }
+
+        
     }
 }

@@ -15,14 +15,16 @@ namespace PasswordManager
 {
     public partial class new_DB : Form
     {
-        public new_DB()
+        DB dashboard;
+        public new_DB(DB dashboard)
         {
             InitializeComponent();
+            this.dashboard = dashboard;
         }
 
         private void cancle_crte_Btn_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Hide();
         }
 
         private void crte_new_DB_Btn_Click(object sender, EventArgs e)
@@ -48,18 +50,30 @@ namespace PasswordManager
                 String DBName = new_DB_text.Text;
                 String Pass = new_db_pass_text.Text;
 
-                using (XmlWriter writer = XmlWriter.Create("C://Users/Solomon/Desktop/"+DBName+".xml"))
-                {
-                    writer.WriteStartElement("Database");
-                    writer.WriteElementString("DatabaseName", DBName);
-                    writer.WriteElementString("DatabasePASS", Pass);
-                    writer.WriteEndElement();
-                    writer.Flush();
-                    MessageBox.Show("Database created successfully");
-                    clearText();
-                }
-           }
 
+                using (XmlWriter writer = XmlWriter.Create("C://Users/Solomon/Desktop/"+DBName+".xml"))
+
+                var folderBrowserDialog = new FolderBrowserDialog();
+                DialogResult result = folderBrowserDialog.ShowDialog();
+                if (result == DialogResult.OK)
+
+                {
+                    string folderName = folderBrowserDialog.SelectedPath;
+                    string filePath = folderName + "/" + DBName + ".xml";
+                    using (XmlWriter writer = XmlWriter.Create(filePath))
+                    {
+                        writer.WriteStartElement("Database");
+                        writer.WriteElementString("DatabaseName", DBName);
+                        writer.WriteElementString("DatabasePASS", Pass);
+                        writer.WriteEndElement();
+                        writer.Flush();
+                        MessageBox.Show("Database created successfully");
+                        clearText();
+                        dashboard.successfulCreation(Pass, filePath);
+                        this.Hide();
+                    }
+                }
+            }
         }
 
         public void clearText()
