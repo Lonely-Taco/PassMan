@@ -13,6 +13,7 @@ namespace PasswordManager
 {
     public partial class Login : Form
     {
+        String filePath = "C://Users/Ramon Gonzalez/Desktop/database.xml";
         DB dashboard;
         public Login(DB dashboard)
         {
@@ -38,9 +39,9 @@ namespace PasswordManager
 
         private void Okay_Btn_Click(object sender, EventArgs e)
         {
-           String pass = MP_Input.Text;
+            String pass = MP_Input.Text;
             dashboard.masterPassword = pass;
-            if(dashboard.UpdateEntryList(dashboard.entryTest()))
+            if (dashboard.UpdateEntryList(dashboard.entryTest()))
             {
                 this.dashboard.successfulLogin();
             }
@@ -64,16 +65,17 @@ namespace PasswordManager
         {
           
             DialogResult result = Choose.ShowDialog();
-            string file = Choose.FileName;
-            Choose_Btn.Text = file;
-            string text = File.ReadAllText(file);
-            //label2.Text = text;
+            filePath = Choose.FileName;
+            label2.Text = filePath;
             
 
 
 
         }
-
+        public String GetFilePath()
+        {
+            return this.filePath;
+        }
         private void Choose_FileOk(object sender, CancelEventArgs e)
         {
            

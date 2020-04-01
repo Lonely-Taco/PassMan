@@ -123,11 +123,11 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(340, 23);
+            this.label2.Location = new System.Drawing.Point(318, 55);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
+            this.label2.Size = new System.Drawing.Size(16, 13);
             this.label2.TabIndex = 8;
-            this.label2.Text = "label2";
+            this.label2.Text = "...";
             // 
             // Login
             // 
