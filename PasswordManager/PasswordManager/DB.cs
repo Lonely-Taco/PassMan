@@ -88,7 +88,7 @@ namespace PasswordManager
             //entrylist[1] = new Entry("title2", "username2", encryptor.encryptPassword("masterpassword", "password2"));
             //entrylist[2] = new Entry("title3", "username3", encryptor.encryptPassword("masterpassword", "password3"));
             //entrylist[3] = new Entry("title4", "username4", encryptor.encryptPassword("masterpassword", "password4"));
-
+            MessageBox.Show(filepath);
             StringBuilder result = new StringBuilder();
             foreach (XElement level1Element in XElement.Load(filepath).Elements("Database"))
             {
@@ -143,10 +143,17 @@ namespace PasswordManager
 
         private void deleteEntryToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            DeleteWarning deleteWarning = new DeleteWarning(this, int.Parse(contextMenuStrip1.Items[5].Text));
+            deleteWarning.Show();
+
             
         }
 
-        
+        public void deleteEntry(int entryNumber)
+        {
+            MessageBox.Show("Deleting entry number " + entryNumber);
+            //delete entryList[entryNumber]
+        }
 
     
     }
