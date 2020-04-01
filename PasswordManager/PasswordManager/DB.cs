@@ -72,18 +72,22 @@ namespace PasswordManager
 
         public Entry[] entryTest()
         {
-            Entry[] entrylist = new Entry[4];
-            entrylist[0] = new Entry("title1", "username1", encryptor.encryptPassword("masterpassword", "password1"));
-            entrylist[1] = new Entry("title2", "username2", encryptor.encryptPassword("masterpassword", "password2"));
-            entrylist[2] = new Entry("title3", "username3", encryptor.encryptPassword("masterpassword", "password3"));
-            entrylist[3] = new Entry("title4", "username4", encryptor.encryptPassword("masterpassword", "password4"));
+            Entry[] entrylist = new Entry[20];
+            for (int i = 0; i < 20; i++)
+            {
+                entrylist[i] = new Entry($"title{0}", $"username{0}", encryptor.encryptPassword("masterpassword", $"password{0}"), i);
+            }
+           // entrylist[0] = new Entry("title1", "username1", encryptor.encryptPassword("masterpassword", "password1"));
+            //entrylist[1] = new Entry("title2", "username2", encryptor.encryptPassword("masterpassword", "password2"));
+            //entrylist[2] = new Entry("title3", "username3", encryptor.encryptPassword("masterpassword", "password3"));
+            //entrylist[3] = new Entry("title4", "username4", encryptor.encryptPassword("masterpassword", "password4"));
 
             return entrylist;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            EditEntry edit = new EditEntry();
+            EditEntry edit = new EditEntry(this);
 
             edit.ShowDialog();
         }
