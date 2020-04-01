@@ -80,5 +80,12 @@ namespace PasswordManager
 
             return entrylist;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            EditEntry edit = new EditEntry();
+
+            edit.ShowDialog();
+        }
     }
 }
