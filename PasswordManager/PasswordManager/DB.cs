@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Windows;
 using System.Xml;
 using System.Xml.Linq;
+using System.IO;
 
 namespace PasswordManager
 {
@@ -21,6 +22,7 @@ namespace PasswordManager
         private string masterPassword;
         public Entry[] entryList { get; set; }
         public string filepath { get; set; }
+
 
         public DB()
         {
@@ -34,7 +36,7 @@ namespace PasswordManager
             Application.Run(loginScreen);
         }
 
- 
+     
 
         public void successfulLogin(string masterPassword, string filepath)
         {
@@ -75,34 +77,14 @@ namespace PasswordManager
             listView1.Items.Add(listViewItem);
         }
 
-
         public Entry[] entryTest(string filepath)
         {
-            Entry[] entrylist = new Entry[1];
-            Login login = new Login(this);
-            XmlDocument db = new XmlDocument();
-            db.Load(login.GetFilePath());
-            XmlNode node = db.DocumentElement.SelectSingleNode("taco");
-            string username = node.InnerText.ToString();
-
-            entrylist[0] = new Entry("title", username, encryptor.encryptPassword("masterpassword", "password"), 0);
-
-            //entrylist[0] = new Entry("title1", "username1", encryptor.encryptPassword("masterpassword", "password1"));
-            //entrylist[1] = new Entry("title2", "username2", encryptor.encryptPassword("masterpassword", "password2"));
-            //entrylist[2] = new Entry("title3", "username3", encryptor.encryptPassword("masterpassword", "password3"));
-            //entrylist[3] = new Entry("title4", "username4", encryptor.encryptPassword("masterpassword", "password4"));
-           
-
+            Entry[] entrylist = new Entry[4];
+            entrylist[0] = new Entry("title1", "username1", encryptor.encryptPassword("masterpassword", "password1"), 0);
+            entrylist[1] = new Entry("title2", "username2", encryptor.encryptPassword("masterpassword", "password2"), 1);
+            entrylist[2] = new Entry("title3", "username3", encryptor.encryptPassword("masterpassword", "password3"), 2);
+            entrylist[3] = new Entry("title4", "username4", encryptor.encryptPassword("masterpassword", "password4"), 3);
             return entrylist;
-        }
-
-      
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            EditEntry edit = new EditEntry(this);
-
-            edit.ShowDialog();
         }
 
         private void listView1_MouseClick(object sender, MouseEventArgs e)
@@ -125,7 +107,6 @@ namespace PasswordManager
 
         private void editEntryToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            label1.Text = "editing";
             Entry entryEdited = entryList[int.Parse(contextMenuStrip1.Items[5].Text)];
 
             EditEntry editEntry = new EditEntry(entryEdited.Title, entryEdited.Username, encryptor.decryptPassword(masterPassword, entryEdited.EncryptedPassword), this);
@@ -141,10 +122,15 @@ namespace PasswordManager
 
         public void deleteEntry(int entryNumber)
         {
-            MessageBox.Show("Deleting entry number " + entryNumber);
+            MessageBox.Show("Deleting entry number " + ++entryNumber);
             //delete entryList[entryNumber]
         }
 
-    
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            EditEntry edit = new EditEntry(this);
+
+            edit.ShowDialog();
+        }
     }
 }
