@@ -78,28 +78,20 @@ namespace PasswordManager
 
         public Entry[] entryTest(string filepath)
         {
-            Entry[] entrylist = new Entry[20];
-            int i = 0;
-            for (i = 0; i < 20; i++)
-            {
-                entrylist[i] = new Entry($"title{i}", $"username{i}", encryptor.encryptPassword("masterpassword", $"password{i}"), i);
-            }
-            // entrylist[0] = new Entry("title1", "username1", encryptor.encryptPassword("masterpassword", "password1"));
+            Entry[] entrylist = new Entry[1];
+            Login login = new Login(this);
+            XmlDocument db = new XmlDocument();
+            db.Load(login.GetFilePath());
+            XmlNode node = db.DocumentElement.SelectSingleNode("taco");
+            string username = node.InnerText.ToString();
+
+            entrylist[0] = new Entry("title", username, encryptor.encryptPassword("masterpassword", "password"), 0);
+
+            //entrylist[0] = new Entry("title1", "username1", encryptor.encryptPassword("masterpassword", "password1"));
             //entrylist[1] = new Entry("title2", "username2", encryptor.encryptPassword("masterpassword", "password2"));
             //entrylist[2] = new Entry("title3", "username3", encryptor.encryptPassword("masterpassword", "password3"));
             //entrylist[3] = new Entry("title4", "username4", encryptor.encryptPassword("masterpassword", "password4"));
-            MessageBox.Show(filepath);
-            StringBuilder result = new StringBuilder();
-            foreach (XElement level1Element in XElement.Load(filepath).Elements("Database"))
-            {
-                result.AppendLine(level1Element.Attribute("Mrsdks").Value);
-                foreach (XElement level2Element in level1Element.Elements("Mrsdks"))
-                {
-                    result.AppendLine("  " + level2Element.Attribute("Username").Value);
-                    result.AppendLine("  " + level2Element.Attribute("Password").Value);
-                }
-            }
-            MessageBox.Show(result.ToString());
+           
 
             return entrylist;
         }
@@ -122,7 +114,6 @@ namespace PasswordManager
                     contextMenuStrip1.Items[0].Text = entryList[int.Parse(listView1.FocusedItem.Text)].Title;
                     contextMenuStrip1.Items[5].Text = listView1.FocusedItem.Text;
                     contextMenuStrip1.Show(Cursor.Position);
-
                 }
             }
         }
@@ -146,7 +137,6 @@ namespace PasswordManager
             DeleteWarning deleteWarning = new DeleteWarning(this, int.Parse(contextMenuStrip1.Items[5].Text));
             deleteWarning.Show();
 
-            
         }
 
         public void deleteEntry(int entryNumber)
