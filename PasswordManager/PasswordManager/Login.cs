@@ -63,9 +63,9 @@ namespace PasswordManager
         {
           
             DialogResult result = Choose.ShowDialog();
-            string file = Choose.FileName;   
-         
-           
+            string file = Choose.FileName;
+            pathText.Text = file;
+
         }
 
         private void Choose_FileOk(object sender, CancelEventArgs e)
