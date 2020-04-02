@@ -82,15 +82,17 @@ namespace PasswordManager
             Login login = new Login(this);
             XmlDocument db = new XmlDocument();
             db.Load(login.GetFilePath());
-            XmlNode node = db.DocumentElement.SelectSingleNode("taco");
+           XmlNode node = db.DocumentElement.SelectSingleNode("//Username");
+            XmlNode password = db.DocumentElement.SelectSingleNode("//Password");
             string username = node.InnerText.ToString();
+            string pass = password.InnerText.ToString();
+            //for( )
+           // {
+                //make loop here to insert the info
+            //}
 
-            entrylist[0] = new Entry("title", username, encryptor.encryptPassword("masterpassword", "password"), 0);
-
-            //entrylist[0] = new Entry("title1", "username1", encryptor.encryptPassword("masterpassword", "password1"));
-            //entrylist[1] = new Entry("title2", "username2", encryptor.encryptPassword("masterpassword", "password2"));
-            //entrylist[2] = new Entry("title3", "username3", encryptor.encryptPassword("masterpassword", "password3"));
-            //entrylist[3] = new Entry("title4", "username4", encryptor.encryptPassword("masterpassword", "password4"));
+              entrylist[0] = new Entry("title", username, encryptor.encryptPassword("masterpassword", pass), 1);
+            
            
 
             return entrylist;
